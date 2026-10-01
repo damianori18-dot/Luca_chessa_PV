@@ -13,7 +13,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        return view('photo.gallery');
+        $photos = Photo::all();
+        return view('photo.gallery', compact('photos'));
     }
 
     /**
@@ -29,34 +30,9 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        // Validazione
-        $request->validate([
-            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:4096',
-            'zip' => 'nullable|file|mimes:zip'
+        $photos = Photo::create([
+            'image' => $request->file('image')->store('gallery', 'public')
         ]);
-
-        // 1️⃣ Upload singole immagini
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('gallery', 'public');
-            }
-        }
-
-        // 2️⃣ Upload ZIP → estrazione cartella
-        if ($request->hasFile('zip')) {
-            $zipPath = $request->file('zip')->store('temp', 'public');
-
-            $zip = new \ZipArchive;
-            if ($zip->open(storage_path('app/public/' . $zipPath)) === TRUE) {
-
-                $zip->extractTo(storage_path('app/public/gallery'));
-                $zip->close();
-            }
-
-            // elimina il file zip
-            Storage::disk('public')->delete($zipPath);
-        }
-        Photo::create(['path' => $path]);
 
         return redirect()->route('photo.gallery');
     }

@@ -4,88 +4,17 @@
             <h2 class="text-center gallery-title color-s">Galleria</h2>
 
             <div class="row gallery-grid g-3">
-                <!-- 1 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="{{ asset('media/hero.jpeg') }}">
-                        <img src="{{ asset('media/hero.jpeg') }}" alt="Sposa in profilo" loading="lazy">
-                        <div class="gallery-overlay"></div>
+                @foreach ($photos as $photo)
+                    <div class="col-12 col-md-4">
+                        <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
+                            data-src="{{ asset('storage/' . $photo->image) }}">
+                            <img src="{{ asset('storage/' . $photo->image) }}" alt="Foto galleria" loading="lazy">
+                            <div class="gallery-overlay"></div>
+                        </div>
                     </div>
-                </div>
-
-                <!-- 2 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="{{ asset('media/hero2.jpeg') }}">
-                        <img src="{{ asset('media/hero2.jpeg') }}" alt="Coppia sulla scogliera" loading="lazy">
-                        <div class="gallery-overlay"></div> 
-                    </div>
-                </div>
-
-                <!-- 3 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="https://picsum.photos/300/200">
-                        <img src="https://picsum.photos/300/200" alt="Sposo che sistema il papillon" loading="lazy">
-                        <div class="gallery-overlay"></div>
-                    </div>
-                </div>
-
-                <!-- 4 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="https://picsum.photos/300/200">
-                        <img src="https://picsum.photos/300/200" alt="Ritratto in bianco e nero" loading="lazy">
-                        <div class="gallery-overlay"></div>
-                    </div>
-                </div>
-
-                <!-- 5 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="https://picsum.photos/300/200">
-                        <img src="https://picsum.photos/300/200" alt="Cena all'aperto" loading="lazy">
-                        <div class="gallery-overlay"></div>
-                    </div>
-                </div>
-
-                <!-- 6 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="https://picsum.photos/300/200">
-                        <img src="https://picsum.photos/300/200" alt="Coppia che cammina" loading="lazy">
-                        <div class="gallery-overlay"></div>
-                    </div>
-                </div>
-
-                <!-- 7 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="https://picsum.photos/300/200">
-                        <img src="https://picsum.photos/300/200" alt="Paesaggio montano" loading="lazy">
-                        <div class="gallery-overlay"></div>
-                    </div>
-                </div>
-
-                <!-- 8 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="https://picsum.photos/300/200">
-                        <img src="https://picsum.photos/300/200" alt="Fotografo al lavoro" loading="lazy">
-                        <div class="gallery-overlay"></div>
-                    </div>
-                </div>
-
-                <!-- 9 -->
-                <div class="col-12 col-md-4">
-                    <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#lightboxModal"
-                        data-src="https://picsum.photos/300/200">
-                        <img src="https://picsum.photos/300/200" alt="Auto d'epoca al lago" loading="lazy">
-                        <div class="gallery-overlay"></div>
-                    </div>
-                </div>
+                @endforeach
             </div>
-        </div>
+            </div>
     </section>
 
     <!-- LIGHTBOX MODAL -->
@@ -95,7 +24,7 @@
                 <button type="button" class="btn-close btn-close-white ms-auto me-2 mt-2" data-bs-dismiss="modal"
                     aria-label="Close"></button>
                 <div class="modal-body p-0">
-                    <img id="lightboxImage" src="{{ asset('media/hero.jpeg') }}" alt="Foto galleria">
+                    <img id="lightboxImage" src="" alt="Foto galleria">
                 </div>
             </div>
         </div>
