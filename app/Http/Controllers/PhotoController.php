@@ -50,7 +50,7 @@ class PhotoController extends Controller
      */
     public function edit(Photo $photo)
     {
-        //
+        return view('photo.edit', compact('photo'));
     }
 
     /**

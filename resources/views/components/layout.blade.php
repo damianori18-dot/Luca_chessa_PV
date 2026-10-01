@@ -39,16 +39,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page"
+                            href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contatti</a>
+                        <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
+                            href="{{ route('contact') }}">Contatti</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('photo.gallery') }}">Galleria</a>
+                        <a class="nav-link {{ request()->routeIs('photo.gallery') ? 'active' : '' }}" href="{{ route('photo.gallery') }}">Galleria</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('photo.create') }}">Admin Galleria</a>
+                        <a class="nav-link {{ request()->routeIs('photo.create') ? 'active' : '' }}" href="{{ route('photo.create') }}">Admin Galleria</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Portfolio</a>
@@ -56,12 +58,24 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Login/Registrati
+                            @auth
+                                Ciao {{ Auth::user()->name }}!
+                            @else
+                                Login/Registrati
+                            @endauth
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                            <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                            @guest
+                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="#"
+                                        onclick="event.preventDefault(); document.querySelector('#logout-form').submit();">Logout</a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            @endguest
                         </ul>
                     </li>
                 </ul>

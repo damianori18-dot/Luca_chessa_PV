@@ -11,10 +11,22 @@
                             <img src="{{ asset('storage/' . $photo->image) }}" alt="Foto galleria" loading="lazy">
                             <div class="gallery-overlay"></div>
                         </div>
+                        @if (Auth::check() && Auth::user()->is_admin)
+                            <a class="btn btn-warning" href="{{ route('photo.edit', $photo->id) }}">Modifica foto</a>
+                            <a class="btn btn-danger" href="#"
+                                onclick="event.preventDefault(); document.querySelector('#delete').submit();">Elimina
+                                foto</a>
+
+                            <form id="delete" action="{{ route('photo.destroy', $photo->id) }}" method="POST"
+                                class="d-none">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                        @endif
                     </div>
                 @endforeach
             </div>
-            </div>
+        </div>
     </section>
 
     <!-- LIGHTBOX MODAL -->
