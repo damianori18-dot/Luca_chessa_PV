@@ -45,7 +45,10 @@
                         <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contatti</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('gallery') }}">Galleria</a>
+                        <a class="nav-link" href="{{ route('photo.gallery') }}">Galleria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('photo.create') }}">Admin Galleria</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Portfolio</a>
