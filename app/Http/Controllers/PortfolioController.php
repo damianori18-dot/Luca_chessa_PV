@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Throwable;
+use ZipArchive;
 
 class PortfolioController extends Controller
 {
@@ -44,7 +45,7 @@ class PortfolioController extends Controller
                 ]);
 
                 foreach ($validated['images'] as $index => $image) {
-                    $path = $image->store('portfolio/'.$set->id, 'public');
+                    $path = $image->store('portfolio/' . $set->id, 'public');
 
                     if ($path === false) {
                         throw new RuntimeException('Unable to store a portfolio image.');
@@ -76,7 +77,7 @@ class PortfolioController extends Controller
 
             if ($failedDeletions !== []) {
                 report(new RuntimeException(
-                    'Unable to remove portfolio images after a failed save: '.implode(', ', $failedDeletions),
+                    'Unable to remove portfolio images after a failed save: ' . implode(', ', $failedDeletions),
                     previous: $exception,
                 ));
             }
@@ -84,7 +85,7 @@ class PortfolioController extends Controller
             throw $exception;
         }
 
-        return redirect()->route('portfolio.index')->with('success', 'Set creato! Codice accesso: '.$set->access_code);
+        return redirect()->route('portfolio.index')->with('success', 'Set creato! Codice accesso: ' . $set->access_code);
     }
 
     public function show($slug)
@@ -103,11 +104,37 @@ class PortfolioController extends Controller
         $set = PortfolioSet::findOrFail($id);
 
         if ($request->code === $set->access_code) {
-            session()->put('portfolio_access_'.$set->id, $set->access_code);
+            session()->put('portfolio_access_' . $set->id, $set->access_code);
 
             return redirect()->route('portfolio.show', $set->slug);
         }
 
         return back()->withErrors(['code' => 'Codice errato']);
+    }
+
+    public function downloadAll($id)
+    {
+        $set = PortfolioSet::findOrFail($id);
+
+        $zip = new ZipArchive;
+        $zipFileName = 'set-' . $set->id . '.zip';
+        $zipPath = storage_path('app/public/temp/' . $zipFileName);
+
+        // crea cartella temp se non esiste
+        if (!file_exists(storage_path('app/public/temp'))) {
+            mkdir(storage_path('app/public/temp'), 0777, true);
+        }
+
+        if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+
+            foreach ($set->images as $image) {
+                $filePath = storage_path('app/public/' . $image->path);
+                $zip->addFile($filePath, basename($image->path));
+            }
+
+            $zip->close();
+        }
+
+        return response()->download($zipPath)->deleteFileAfterSend(true);
     }
 }

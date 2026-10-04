@@ -42,3 +42,7 @@ Route::post('/admin/portfolio', [PortfolioController::class, 'store'])->name('po
 Route::post('/portfolio/{id}/access', [PortfolioController::class, 'checkAccess'])
 ->middleware('is_admin')
 ->name('portfolio.access.check');
+
+Route::get('/set/{id}/download-all', [PortfolioController::class, 'downloadAll'])
+    ->name('photo.downloadAll');
+

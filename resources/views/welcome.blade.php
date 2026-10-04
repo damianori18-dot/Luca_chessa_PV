@@ -15,7 +15,7 @@
                 <p class="color-s">Strategie creative, fotografia e contenuti su misura per venue che vogliono essere
                     scelte, vissute,
                     ricordate.</p>
-                <a href="" class="btn btn-light">Prenota una consulenza</a>
+                <a href="{{ route('contact') }}" class="btn btn-light">Prenota una consulenza</a>
             </div>
 
         </div>
@@ -38,7 +38,7 @@
 
                 </p>
 
-                <a href="#" class="btn-scopri">SCOPRI DI PIÙ</a>
+                <a href="{{ route('photo.gallery') }}" class="btn-scopri">SCOPRI DI PIÙ</a>
             </div>
 
             <div class="image">

@@ -111,10 +111,9 @@
                 <div class="col-md-4 mb-4">
                     <h5 class="fw-light playfair-display color-s">Link rapidi</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white-50 text-decoration-none">Portfolio</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Servizi</a></li>
+                        <li><a href="{{ route('portfolio.index') }}" class="text-white-50 text-decoration-none">Portfolio</a></li>
                         <li><a href="#" class="text-white-50 text-decoration-none">Chi sono</a></li>
-                        <li><a href="#" class="text-white-50 text-decoration-none">Contatti</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-white-50 text-decoration-none">Contattaci</a></li>
                     </ul>
                 </div>
 
