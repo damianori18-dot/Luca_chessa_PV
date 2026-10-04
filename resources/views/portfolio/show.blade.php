@@ -4,10 +4,9 @@
 
         <div class="py-5 text-center">
             <h2 class="gallery-title color-s">{{ $set->title }}</h2>
-            <p class="text-secondary">Cartella di consegna</p>
         </div>
 
-        <div class="delivery-stack">
+        <div class="delivery-stack px-1">
 
             @foreach ($set->images as $image)
                 <div class="delivery-item">
