@@ -23,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg px-3 {{ $attributes->get('class') }}" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <div class="row">
                     <div class="col display-4 playfair-display border-bottom border-2 border-white color-s">LC</div>
                     <div class="col d-flex flex-column justify-content-center">
@@ -50,15 +50,20 @@
                         <a class="nav-link {{ request()->routeIs('photo.gallery') ? 'active' : '' }}"
                             href="{{ route('photo.gallery') }}">Galleria</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('portfolio.index') ? 'active' : '' }}"
+                            href="{{ route('portfolio.index') }}">Portfolio</a>
+                    </li>
                     @if (Auth::check() && Auth::user()->is_admin)
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('photo.create') ? 'active' : '' }}"
                                 href="{{ route('photo.create') }}">Admin Galleria</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('portfolio.create') ? 'active' : '' }}"
+                                href="{{ route('portfolio.create') }}">Admin Portfolio</a>
+                        </li>
                     @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Portfolio</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">

@@ -217,6 +217,12 @@ h2 {
     opacity: 1;
 }
 
+.gallery-overlay svg {
+    width: 32px;
+    height: 32px;
+    stroke: #fff;
+}
+
 .gallery-caption {
     position: absolute;
     bottom: 12px;
@@ -236,4 +242,34 @@ h2 {
     width: 100%;
     height: auto;
     display: block;
+}
+
+
+
+/* portfolio show */
+.delivery-stack {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+
+.delivery-item {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.delivery-photo {
+    max-width: 100%;
+    /* non supera la larghezza del contenitore */
+    max-height: 85vh;
+    /* limite verticale elegante */
+    height: auto;
+    /* mantiene proporzioni */
+    width: auto;
+    /* mantiene proporzioni */
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
