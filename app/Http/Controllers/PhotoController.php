@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 
 class PhotoController extends Controller
 {
@@ -14,6 +16,7 @@ class PhotoController extends Controller
     public function index()
     {
         $photos = Photo::all();
+
         return view('photo.gallery', compact('photos'));
     }
 
@@ -31,7 +34,7 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         $photos = Photo::create([
-            'image' => $request->file('image')->store('gallery', 'public')
+            'image' => $request->file('image')->store('gallery', 'public'),
         ]);
 
         return redirect()->route('photo.gallery');
@@ -58,14 +61,26 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        //
+        $photo->update([
+            'image' => $request->file('image')->store('gallery', 'public'),
+        ]);
+
+        return redirect()->route('photo.gallery');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Photo $photo)
+    public function destroy(Photo $photo): RedirectResponse
     {
-        //
+        $disk = Storage::disk('public');
+
+        if ($disk->exists($photo->image) && ! $disk->delete($photo->image)) {
+            throw new RuntimeException('Unable to delete the photo file.');
+        }
+
+        $photo->delete();
+
+        return redirect()->route('photo.gallery');
     }
 }

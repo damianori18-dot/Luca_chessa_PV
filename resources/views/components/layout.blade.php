@@ -47,11 +47,15 @@
                             href="{{ route('contact') }}">Contatti</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('photo.gallery') ? 'active' : '' }}" href="{{ route('photo.gallery') }}">Galleria</a>
+                        <a class="nav-link {{ request()->routeIs('photo.gallery') ? 'active' : '' }}"
+                            href="{{ route('photo.gallery') }}">Galleria</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('photo.create') ? 'active' : '' }}" href="{{ route('photo.create') }}">Admin Galleria</a>
-                    </li>
+                    @if (Auth::check() && Auth::user()->is_admin)
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('photo.create') ? 'active' : '' }}"
+                                href="{{ route('photo.create') }}">Admin Galleria</a>
+                        </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="#">Portfolio</a>
                     </li>

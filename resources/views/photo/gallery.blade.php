@@ -13,14 +13,10 @@
                         </div>
                         @if (Auth::check() && Auth::user()->is_admin)
                             <a class="btn btn-warning" href="{{ route('photo.edit', $photo->id) }}">Modifica foto</a>
-                            <a class="btn btn-danger" href="#"
-                                onclick="event.preventDefault(); document.querySelector('#delete').submit();">Elimina
-                                foto</a>
-
-                            <form id="delete" action="{{ route('photo.destroy', $photo->id) }}" method="POST"
-                                class="d-none">
+                            <form action="{{ route('photo.destroy', $photo->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Elimina foto</button>
                             </form>
                         @endif
                     </div>
