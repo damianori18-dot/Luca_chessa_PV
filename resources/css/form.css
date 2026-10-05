@@ -1,0 +1,18 @@
+form .form-control {
+    border-radius: 0;
+    border: 1px solid #ccc;
+    padding: 14px;
+    background: #f8f8f8;
+}
+
+form .form-control:focus {
+    border-color: #000;
+    background: #fff;
+    box-shadow: none;
+}
+
+h2 {
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #111111;
+}

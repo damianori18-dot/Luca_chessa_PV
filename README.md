@@ -1,58 +1,197 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# LCPhotographer
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistema web per portfolio fotografico realizzato con Laravel, pensato per mostrare immagini in gallerie pubbliche e set di portfolio protetti da codice di accesso.
 
-## About Laravel
+## Descrizione
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+LCPhotographer è un progetto di portfolio fotografico che combina:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- landing page pubblica con presentazione del brand
+- modulo di contatto con invio email
+- galleria fotografica
+- portfolio a set, con anteprima e accesso protetto da codice
+- download di tutti i file di un set in un archivio ZIP
+- area amministrativa riservata per la gestione dei contenuti
+- autenticazione e sicurezza con Laravel Fortify
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Stack tecnologico
 
-## Learning Laravel
+- PHP 8.3
+- Laravel 13
+- Composer
+- Vite
+- Bootstrap 5
+- Tailwind CSS
+- Laravel Fortify
+- Pest per test
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Funzionalità principali
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Frontend pubblico
+- Homepage con presentazione del fotografo/progetto
+- pagina di contatto con form che invia un'email tramite Laravel Mail
+- galleria foto pubblica
+- pagina portfolio con elenco di set disponibili
+- accesso a singoli set tramite codice d'accesso
+- download completo di un set in ZIP
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Area admin
+- creazione e gestione di foto
+- creazione di set portfolio con più immagini
+- caricamento immagini in storage pubblico
+- gestione autorizzazioni tramite middleware `is_admin`
+- accesso protetto agli endpoint amministrativi
 
-## Agentic Development
+### Sicurezza
+- autenticazione utente con Laravel Fortify
+- supporto per autenticazione a due fattori e passkey (configurazione prevista dal provider Fortify)
+- rate limiting per login e passkey
+- controllo admin per vie di amministrazione
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Requisiti
+
+Prima di iniziare assicurati di avere installato:
+
+- PHP >= 8.3
+- Composer
+- Node.js e npm
+- un database supportato da Laravel (SQLite, MySQL, PostgreSQL, ecc.)
+
+## Installazione
+
+1. Clona il repository:
+
+   ```bash
+   git clone <url-del-repository>
+   cd LCPhotographer
+   ```
+
+2. Installa le dipendenze PHP:
+
+   ```bash
+   composer install
+   ```
+
+3. Copia il file di ambiente:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Genera la chiave dell'applicazione:
+
+   ```bash
+   php artisan key:generate
+   ```
+
+5. Installa le dipendenze frontend:
+
+   ```bash
+   npm install
+   ```
+
+6. Esegui le migration del database:
+
+   ```bash
+   php artisan migrate
+   ```
+
+7. Avvia l'applicazione:
+
+   ```bash
+   composer run dev
+   ```
+
+In alternativa, puoi avviare separatamente il backend e il frontend:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+php artisan serve
+npm run dev
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Comandi utili
 
-## Contributing
+### Avvio locale
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer run dev
+```
 
-## Code of Conduct
+### Build frontend
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+npm run build
+```
 
-## Security Vulnerabilities
+### Test
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan test
+```
 
-## License
+### Setup rapido
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+composer run setup
+```
+
+Questo script esegue installazione dipendenze, creazione `.env`, chiave app, migration e build frontend.
+
+## Struttura del progetto
+
+```text
+app/
+  Http/
+    Controllers/
+    Middleware/
+  Models/
+  Providers/
+config/
+public/
+resources/
+routes/
+storage/
+tests/
+```
+
+## Gestione admin
+
+Per accedere alle aree riservate, il tuo utente deve avere il campo `is_admin` impostato a `1`.
+
+Esempio SQL:
+
+```sql
+UPDATE users SET is_admin = 1 WHERE email = 'tuo@email.com';
+```
+
+Le route amministrative sono protette dal middleware `is_admin`.
+
+## Variabili di ambiente
+
+Il file `.env` va configurato con i parametri del database e della mail. In particolare, per il form di contatto:
+
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="hello@example.com"
+MAIL_FROM_NAME="LCPhotographer"
+```
+
+Se usi SQLite locale, puoi impostare:
+
+```env
+DB_CONNECTION=sqlite
+DB_DATABASE=/path/to/database/database.sqlite
+```
+
+## Licenza
+
+Questo progetto è distribuito con licenza MIT.
+
+## Note
+
+Questo repository è stato pensato come soluzione completa per un sito fotografico professionale con gestione semplificata dei contenuti e accesso protetto ai set portfolio.

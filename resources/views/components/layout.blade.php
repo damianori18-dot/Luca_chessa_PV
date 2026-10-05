@@ -14,7 +14,8 @@
         rel="stylesheet">
     {{-- icone bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+    {{-- aos --}}
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -111,9 +112,11 @@
                 <div class="col-md-4 mb-4">
                     <h5 class="fw-light playfair-display color-s">Link rapidi</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('portfolio.index') }}" class="text-white-50 text-decoration-none">Portfolio</a></li>
+                        <li><a href="{{ route('portfolio.index') }}"
+                                class="text-white-50 text-decoration-none">Portfolio</a></li>
                         <li><a href="#" class="text-white-50 text-decoration-none">Chi sono</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-white-50 text-decoration-none">Contattaci</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-white-50 text-decoration-none">Contattaci</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -121,13 +124,13 @@
                 <div class="col-md-4 mb-4">
                     <h5 class="fw-light playfair-display color-s">Mini Gallery</h5>
                     <div class="d-flex flex-wrap gap-2">
-                        <img src="https://picsum.photos/80?random=1" class="rounded" width="80" height="80"
+                        <img src="{{asset('media/hero.jpeg')}}" class="rounded" width="80" height="80"
                             alt="photo">
-                        <img src="https://picsum.photos/80?random=2" class="rounded" width="80" height="80"
+                        <img src="{{asset('media/hero2.jpeg')}}" class="rounded" width="80" height="80"
                             alt="photo">
-                        <img src="https://picsum.photos/80?random=3" class="rounded" width="80" height="80"
+                        <img src="{{asset('media/hero3.png')}}" class="rounded" width="80" height="80"
                             alt="photo">
-                        <img src="https://picsum.photos/80?random=4" class="rounded" width="80" height="80"
+                        <img src="{{asset('media/hero4.png')}}" class="rounded" width="80" height="80"
                             alt="photo">
                     </div>
                 </div>
@@ -140,9 +143,10 @@
             <div class="text-center">
                 <p class="small mb-1 color-s">© 2026 Luca Chessa Photography — Tutti i diritti riservati.</p>
                 <div class="d-flex justify-content-center gap-3 fs-4">
-                    <a href="#" class="text-white-50"><i class="bi bi-instagram color-s"></i></a>
-                    <a href="#" class="text-white-50"><i class="bi bi-facebook color-s"></i></a>
-                    <a href="#" class="text-white-50"><i class="bi bi-camera color-s"></i></a>
+                    <a href="https://www.instagram.com/lucachessa.pv/" class="text-white-50" target="_blanck"><i
+                            class="bi bi-instagram color-s"></i></a>
+                    <a href="{{ route('photo.gallery') }}" class="text-white-50"><i
+                            class="bi bi-camera color-s"></i></a>
                 </div>
             </div>
 
@@ -150,7 +154,11 @@
     </footer>
 
 
-
+    {{-- aos js --}}
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

@@ -1,3 +1,11 @@
 @import 'bootstrap';
 
 @import './style.css';
+
+@import './home.css';
+
+@import './form.css';
+
+@import './gallery.css';
+
+@import './portfolio.css';
