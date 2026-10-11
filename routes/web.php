@@ -32,17 +32,16 @@ Route::get('/portfolio/{slug}', [PortfolioController::class, 'show'])->name('por
 
 // admin: crea set
 Route::get('/admin/portfolio/create', [PortfolioController::class, 'create'])
-->middleware('is_admin')
-->name('portfolio.create');
+    ->middleware('is_admin')
+    ->name('portfolio.create');
 
 // admin: salva set
 Route::post('/admin/portfolio', [PortfolioController::class, 'store'])->name('portfolio.store');
 
 // check access code
 Route::post('/portfolio/{id}/access', [PortfolioController::class, 'checkAccess'])
-->middleware('is_admin')
-->name('portfolio.access.check');
+    ->middleware('throttle:5,1')
+    ->name('portfolio.access.check');
 
 Route::get('/set/{id}/download-all', [PortfolioController::class, 'downloadAll'])
     ->name('photo.downloadAll');
-
